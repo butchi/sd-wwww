@@ -1,0 +1,156 @@
+<template>
+    <v-row>
+        <v-col cols="12" md="3">
+            <client-only placeholder="Loading...">
+                <v-select v-model="selectWho" :items="selectObj.who" item-title="ja" item-value="en" label="誰が"
+                    return-value>
+                </v-select>
+                <v-select v-model="selectWhen" :items="selectObj.when" item-title="ja" item-value="en" label="いつ"
+                    return-value>
+                </v-select>
+                <v-select v-model="selectWhere" :items="selectObj.where" item-title="ja" item-value="en" label="どこで"
+                    return-value>
+                </v-select>
+                <v-select v-model="selectWhat" :items="selectObj.what" item-title="ja" item-value="en" label="何をした"
+                    return-value>
+                </v-select>
+            </client-only>
+
+            <v-btn class="ma-2" color="green" @click="selectRandom">
+                <v-icon icon="mdi-dice-5"></v-icon>
+                ランダム
+            </v-btn>
+
+            <v-btn class="ma-2" color="primary" @click="generateImage">
+                <v-icon icon="mdi-palette"></v-icon>
+                生成
+            </v-btn>
+        </v-col>
+        <v-col cols="12" md="5">
+            <v-card>
+                <v-card-title>結果表示</v-card-title>
+                <v-card-text v-if="isResult && txtWho && txtWhat && txtWhere && txtWhen">
+                    <v-row v-for="y in [0, 1]">
+                        <v-col v-for="x in [0, 1]">
+                            <v-img
+                                :src="`/sd-img/${txtWho},_${txtWhat}_in_${txtWhere}_in_${txtWhen},_natural_face,_natural_eyes,_wallpaper,_8k/seed_${1 + x + 2 * y}_${('00000' +(1 + x + 2 * y)).slice(-5)}.png`"
+                                class="grey lighten-2">
+                            </v-img>
+                        </v-col>
+                    </v-row>
+
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
+</template>
+
+<script>
+export default {
+    data: () => ({
+        isResult: false,
+        txtWho: "",
+        txtWhat: "",
+        txtWhere: "",
+        txtWhen: "",
+        selectWho: null,
+        selectWhat: null,
+        selectWhere: null,
+        selectWhen: null,
+        selectObj: {
+            "who": [{
+                "ja": "女子高生",
+                "en": "a_cutest_japanese_student_kawaii_girl",
+            }, {
+                "ja": "宇宙飛行士",
+                "en": "an_astronought",
+            }, {
+                "ja": "侍",
+                "en": "a_coolest_samurai",
+            }, {
+                "ja": "シェフ",
+                "en": "a_coolest_cheff",
+            }, {
+                "ja": "エイリアン",
+                "en": "an_alien",
+            }, {
+                "ja": "アインシュタイン",
+                "en": "einstein",
+            }],
+            "what": [{
+                "ja": "ラクロスする",
+                "en": "playing_lacrosse",
+            }, {
+                "ja": "バスケットボールする",
+                "en": "playing_basketball",
+            }, {
+                "ja": "空を飛ぶ",
+                "en": "flying_the_sky",
+            }, {
+                "ja": "木を登る",
+                "en": "climbing_a_tree",
+            }, {
+                "ja": "泳ぐ",
+                "en": "swimming",
+            }, {
+                "ja": "ゲームする",
+                "en": "playing_a_game",
+            }],
+            "where": [{
+                "ja": "学校",
+                "en": "a_school",
+            }, {
+                "ja": "森の中",
+                "en": "the_forest",
+            }, {
+                "ja": "山頂",
+                "en": "the_summit_of_a_mountain",
+            }, {
+                "ja": "火星",
+                "en": "mars",
+            }, {
+                "ja": "砂漠の真ん中",
+                "en": "middle_of_the_desert",
+            }, {
+                "ja": "テニスコート",
+                "en": "tennis_court",
+            }],
+            "when": [{
+                "ja": "真夏",
+                "en": "midsummer",
+            }, {
+                "ja": "真夜中",
+                "en": "the_middle_of_the_night",
+            }, {
+                "ja": "クリスマス",
+                "en": "christmas",
+            }, {
+                "ja": "中世",
+                "en": "middle_ages",
+            }, {
+                "ja": "誕生日",
+                "en": "birthday",
+            }, {
+                "ja": "結婚式中",
+                "en": "the_wedding_ceremony",
+            }],
+        },
+    }),
+    methods: {
+        selectRandom() {
+            this.selectWho = this.selectObj.who[Math.floor(Math.random() * 6)].en
+            this.selectWhat = this.selectObj.what[Math.floor(Math.random() * 6)].en
+            this.selectWhere = this.selectObj.where[Math.floor(Math.random() * 6)].en
+            this.selectWhen = this.selectObj.when[Math.floor(Math.random() * 6)].en
+        },
+        generateImage() {
+            this.txtWho = this.selectWho
+            this.txtWhat = this.selectWhat
+            this.txtWhere = this.selectWhere
+            this.txtWhen = this.selectWhen
+
+            this.isResult = true
+        },
+    }
+}
+</script>
