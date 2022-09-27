@@ -10,14 +10,13 @@
     </v-app-bar>
 
     <v-main>
-
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-main>
 
     <v-footer app>
-      <!-- -->
+      &copy; 2022 IWABUCHI Yu(u)ki butchi
     </v-footer>
   </v-app>
 </template>
