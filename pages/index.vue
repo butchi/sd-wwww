@@ -42,7 +42,7 @@
                     <v-row v-for="y in [0, 1]">
                         <v-col v-for="x in [0, 1]">
                             <v-img
-                                :src="`/sd-img/${txtWho},_${txtWhat}_in_${txtWhere}_in_${txtWhen},_natural_face,_natural_eyes,_wallpaper,_8k/seed_${1 + x + 2 * y}_${('00000' +(1 + x + 2 * y)).slice(-5)}.png`"
+                                :src="`/sd-img/${txtWho},_${txtWhat}_in_${txtWhere}_in_${txtWhen}/seed_${1 + x + 2 * y}_${('00000' +(1 + x + 2 * y)).slice(-5)}.png`"
                                 class="grey lighten-2">
                             </v-img>
                         </v-col>
@@ -63,7 +63,7 @@
                 <v-card-title>結果表示</v-card-title>
                 <v-card-text v-if="isResult && txtWho && txtWhat && txtWhere && txtWhen">
                     <v-img
-                        :src="`/sd-img/${txtWho},_${txtWhat}_in_${txtWhere}_in_${txtWhen},_natural_face,_natural_eyes,_wallpaper,_8k/seed_${curIdx}_${('00000' + curIdx).slice(-5)}.png`"
+                        :src="`/sd-img/${txtWho},_${txtWhat}_in_${txtWhere}_in_${txtWhen}/seed_${curIdx}_${('00000' + curIdx).slice(-5)}.png`"
                         class="grey lighten-2">
                     </v-img>
                 </v-card-text>
